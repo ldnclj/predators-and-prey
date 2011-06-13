@@ -9,15 +9,21 @@
 	(stroke 235 0 0)
 	(fill 235 0 0)
 	(ellipse (:x predator) (:y predator) (:radius predator) (:radius predator)))
-	
+
+(defn draw-prey [prey]
+	(stroke 0 235 0)
+	(fill 0 235 0)
+	(ellipse (:x prey) (:y prey) (:radius prey) (:radius prey))
+)
+
 (defn draw
 	"Called every animation frame"
 	[]
-	(let [data (simulation/pulse)]
+	(let [data (simulation/pulse screen-size)]
 		(background 51)
 	
 		(doall (map draw-predator (:predators data)))
-
+		(doall (map draw-prey (:prey data)))
 	))
 
 (defn setup []
