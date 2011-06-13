@@ -13,21 +13,12 @@
 (defn draw
 	"Called every animation frame"
 	[]
-(let [data (simulation/pulse)]
-	(background 51)
+	(let [data (simulation/pulse)]
+		(background 51)
+	
+		(doall (map draw-predator (:predators data)))
 
-	(doall (map draw-predator (:predators data)))
-
-  (fill-float (rand-int 125) (rand-int 125) (rand-int 125))
-	(radians 45)
-  (with-translation [(/ 200 2) (/ 200 2)]
-    (with-rotation [QUARTER_PI]
-      (begin-shape)
-      (vertex -50  50)
-      (vertex  50  50)
-      (vertex  50 -100)
-      (vertex -50 -50)
-      (end-shape CLOSE)))))
+	))
 
 (defn setup []
 	"Runs once."
