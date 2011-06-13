@@ -1,7 +1,8 @@
-(ns predators-and-prey.simulation)
+(ns predators-and-prey.simulation
+	(:use predators-and-prey.constants))
 
-(def predator {:vx 2 :vy 2 :max-velocity 7 :radius 10})
-(def prey {:vx 2 :vy 2 :max-velocity 4 :radius 5})
+(def predator {:max-velocity 7 :radius 10})
+(def prey {:max-velocity 4 :radius 5})
 
 (def animals (atom {}))
 
@@ -15,18 +16,23 @@
 	(conj {:x x :y y :vx vx :vy vy} prey)))
 	
 (defn prey-generator [screen-size]
-	#(conj {:x (rand-int screen-size) :y (rand-int screen-size) ::vx (rand-int (:max-velocity prey)) :vy (rand-int (:max-velocity prey))} prey))
+	#(conj {:x (rand-int screen-size) :y (rand-int screen-size) :vx (rand-int (:max-velocity prey)) :vy (rand-int (:max-velocity prey))} prey))
 	
-(defn initial-state [screen-size]
+(defn initial-state []
 	{:predators [(create-predator 50 50 4 4) (create-predator (- screen-size 100) (- screen-size 100) -4 -4)]
 	:prey (take 50 (repeatedly (prey-generator screen-size)))})
 
-(defn think [screen-size]
-	@animals)
+(defn move [animal]
+	(let [x (:x animal) y (:y animal)
+	vx (:vx animal) vy (:vy animal)]
+	(assoc animal :x (+ x vx) :y (+ y vy))))
+	
+(defn think [current-state]
+	(let [new-predators (map move (:predators current-state))]
+	(assoc @animals :predators new-predators)))
 
-(defn pulse [screen-size]
+(defn pulse []
 	(let [bounded-screen-size (- screen-size 20)]
 	(if (empty? @animals)
-		(swap! animals conj (initial-state screen-size)
-		(swap! animals conj (think screen-size)))))
-	@animals)
+		(reset! animals (initial-state))
+		(swap! animals think))))

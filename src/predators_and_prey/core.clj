@@ -1,8 +1,9 @@
 (ns predators-and-prey.core
-	(:use [rosado.processing] [rosado.processing.applet])
+	(:use [rosado.processing]
+		[rosado.processing.applet]
+		[predators-and-prey.constants])
 	(:require [predators-and-prey.simulation :as simulation]))
 
-(def screen-size 800)
 
 
 (defn draw-predator [predator]
@@ -19,7 +20,7 @@
 (defn draw
 	"Called every animation frame"
 	[]
-	(let [data (simulation/pulse screen-size)]
+	(let [data (simulation/pulse)]
 		(background 51)
 	
 		(doall (map draw-predator (:predators data)))
