@@ -3,3 +3,13 @@ h1. Predators and Prey
 A London Clojure dojo exercise.
 
 Moving on from Hungry Balls we are now going to try and create Predators and Prey and have the Predators hunt the Prey.
+
+h2. Getting started
+
+Start a REPL with lein or cake.
+
+In the repl:
+
+* `(use :reload-all 'predators-and-prey.core)`
+* `(pnp-start)`
+* `(pnp-stop)`
