@@ -1,0 +1,10 @@
+.redcar
+*.class
+.cake
+pom.xml
+*.jar
+*.war
+lib
+classes
+build
+

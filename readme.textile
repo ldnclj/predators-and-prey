@@ -1,0 +1,5 @@
+h1. Predators and Prey
+
+A London Clojure dojo exercise.
+
+Moving on from Hungry Balls we are now going to try and create Predators and Prey and have the Predators hunt the Prey.
