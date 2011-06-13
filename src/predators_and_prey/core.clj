@@ -24,9 +24,13 @@
   (fill 226)
   (framerate 10))
 
-(defapplet example2 :title "An example."
+(defapplet predators :title "An example."
   :setup setup :draw draw :size [200 200])
 
-(defn pnp []
-	(run example2)
+(defn pnp-start []
+	(run predators)
+)
+
+(defn pnp-stop []
+	(stop predators)
 )
