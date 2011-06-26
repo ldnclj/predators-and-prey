@@ -19,17 +19,20 @@
 	#(conj {:x (rand-int screen-size) :y (rand-int screen-size) :vx (rand-int (:max-velocity prey)) :vy (rand-int (:max-velocity prey))} prey))
 	
 (defn initial-state []
-	{:predators [(create-predator 50 50 4 4) (create-predator (- screen-size 100) (- screen-size 100) -4 -4)]
+	{:predators [(create-predator 50 50 4 4)
+	(create-predator (- screen-size 100) (- screen-size 100) -4 -4)]
 	:prey (take 50 (repeatedly (prey-generator screen-size)))})
 
 (defn move [animal]
 	(let [x (:x animal) y (:y animal)
 	vx (:vx animal) vy (:vy animal)]
-	(assoc animal :x (+ x vx) :y (+ y vy))))
+	(assoc animal :x (mod (+ x vx) screen-size) :y (mod (+ y vy) screen-size))))
 	
 (defn think [current-state]
 	(let [new-predators (map move (:predators current-state))]
-	(assoc @animals :predators new-predators)))
+	( -> @animals
+		(assoc :predators new-predators))))
+	;; Eat the prey that have been caught))
 
 (defn pulse []
 	(let [bounded-screen-size (- screen-size 20)]
