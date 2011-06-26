@@ -27,12 +27,15 @@
 	(let [x (:x animal) y (:y animal)
 	vx (:vx animal) vy (:vy animal)]
 	(assoc animal :x (mod (+ x vx) screen-size) :y (mod (+ y vy) screen-size))))
-	
+
+(defn surviving? [predators]
+	(fn [prey] false))
+
 (defn think [current-state]
-	(let [new-predators (map move (:predators current-state))]
+	(let [new-predators (map move (:predators current-state))
+		remaining-prey (filter (surviving? new-predators) (:prey current-state))]
 	( -> @animals
-		(assoc :predators new-predators))))
-	;; Eat the prey that have been caught))
+		(assoc :predators new-predators :prey remaining-prey))))
 
 (defn pulse []
 	(let [bounded-screen-size (- screen-size 20)]
