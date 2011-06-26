@@ -1,5 +1,6 @@
 (ns predators-and-prey.simulation
-	(:use predators-and-prey.constants))
+	(:use predators-and-prey.constants)
+	(:use predators-and-prey.collisions))
 
 (def predator {:max-velocity 7 :radius 10})
 (def prey {:max-velocity 4 :radius 5})
@@ -29,7 +30,8 @@
 	(assoc animal :x (mod (+ x vx) screen-size) :y (mod (+ y vy) screen-size))))
 
 (defn surviving? [predators]
-	(fn [prey] false))
+	(fn [prey]
+		(if (nil? (some #(collides? prey %) predators)) true false)))
 
 (defn think [current-state]
 	(let [new-predators (map move (:predators current-state))
