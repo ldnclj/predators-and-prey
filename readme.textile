@@ -10,6 +10,6 @@ Start a REPL with lein or cake.
 
 In the repl:
 
-* `(use :reload-all 'predators-and-prey.core)`
-* `(pnp-start)`
-* `(pnp-stop)`
+* @(use :reload-all 'predators-and-prey.core)@
+* @(pnp-start)@
+* @(pnp-stop)@
