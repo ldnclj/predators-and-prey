@@ -4,5 +4,5 @@
                  [org.clojure/clojure-contrib "1.2.0"]
                  [midje "1.1.1"]
                  [org.clojars.automata/rosado.processing "1.1.0"]]
-  :dev-dependencies [ [swank-clojure "1.3.1"]]
+  :dev-dependencies [[swank-clojure "1.3.1"]]
   :main predators-and-prey.core)
