@@ -42,4 +42,7 @@
 
 (defn pnp-stop []
 	(stop predators)
-)
+        )
+
+(defn -main []
+  (pnp-start))
